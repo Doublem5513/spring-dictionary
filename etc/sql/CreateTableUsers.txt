@@ -1,0 +1,10 @@
+CREATE TABLE IF NOT EXISTS USERS(
+  id INT PRIMARY KEY AUTO_INCREMENT,
+  username NVARCHAR(50) NOT NULL,
+  password NVARCHAR(50) NOT NULL,
+  email NVARCHAR(50)
+);
+
+INSERT INTO USERS (username, password, email) VALUES ('mmatosevic', 'pass', 'matija5513@gmail.com');
+
+SELECT * FROM USERS

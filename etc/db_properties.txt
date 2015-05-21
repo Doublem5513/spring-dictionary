@@ -1,0 +1,5 @@
+C:/Users/mmatosevic/database
+MainDB
+jdbc:h2:file:C:/Users/mmatosevic/database/MainDB
+"sa"
+""

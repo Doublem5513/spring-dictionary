@@ -10,4 +10,5 @@ import java.util.Collection;
  */
 public interface DictionaryEntryRepository extends CrudRepository<DictionaryEntry, Long> {
     Iterable<DictionaryEntry> findByEnglish(String english);
+    Iterable<DictionaryEntry> findByEnglishLike(String english);
 }

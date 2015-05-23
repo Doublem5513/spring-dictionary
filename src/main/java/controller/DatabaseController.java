@@ -1,15 +1,12 @@
 package controller;
 
 import data.DictionaryEntry;
-import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import repositories.DictionaryEntryRepository;
 
-import javax.activation.DataSource;
 import java.io.*;
 import java.util.Collection;
 import java.util.LinkedList;
@@ -40,15 +37,20 @@ public class DatabaseController {
     }
 
     @RequestMapping(value = "/search",method = RequestMethod.GET)
-    public Collection<DictionaryEntry> search(@RequestParam("eng") String eng){
-        Iterable<DictionaryEntry> all = dictionaryEntryRepository.findAll();
-        LinkedList<DictionaryEntry> result = new LinkedList<>();
-        for(DictionaryEntry entry : all){
-            if(entry.getEnglish().toLowerCase().contains(eng.toLowerCase())){
-                result.add(entry);
-            }
+    public Collection<DictionaryEntry> search(@RequestParam("eng") String eng, @RequestParam(required = false) Boolean like) {
+
+        Iterable<DictionaryEntry> all = null;
+        if (like != null && !like) {
+            all = dictionaryEntryRepository.findByEnglish(eng);
+        } else {
+            all = dictionaryEntryRepository.findByEnglishLike("%" + eng + "%");
         }
-        return result;
+
+        LinkedList<DictionaryEntry> dictionaryEntries = new LinkedList<>();
+        for (DictionaryEntry entry : all) {
+            dictionaryEntries.add(entry);
+        }
+        return dictionaryEntries;
     }
 
     @RequestMapping(value = "/import", method = RequestMethod.GET)

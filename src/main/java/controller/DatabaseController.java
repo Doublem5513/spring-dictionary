@@ -23,9 +23,6 @@ public class DatabaseController {
     @Autowired
     private DictionaryEntryRepository dictionaryEntryRepository;
 
-    @Autowired
-    private SessionFactory sessionFactory;
-
     @RequestMapping(method = RequestMethod.GET)
     public @ResponseBody Collection<DictionaryEntry> getAllEntries(){
         final Iterable<DictionaryEntry> all = dictionaryEntryRepository.findAll();

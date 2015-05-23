@@ -7,4 +7,10 @@ CREATE TABLE IF NOT EXISTS USERS(
 
 INSERT INTO USERS (username, password, email) VALUES ('mmatosevic', 'pass', 'matija5513@gmail.com');
 
-SELECT * FROM USERS
+SELECT * FROM USERS;
+
+UPDATE USERS SET
+  username='oktopid',
+  password='8pidForPass',
+  email='okto@pid.org'
+WHERE id=1;
